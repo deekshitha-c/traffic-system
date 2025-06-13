@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Management System - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <h1 id="junctionTitle" >Traffic Management Dashboard</h1>
+            <button onclick="window.location.href='select-junction.html'" class="main-btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                <i class="fas fa-exchange-alt"></i> Switch Junction
+            </button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="video-grid">
+            <div class="signal-card">
+                <div class="signal-title">Signal A</div>
+                <div class="video-feed" id="videoA">Video Feed</div>
+                <div class="signal-info">
+                    <div class="status-label green">🟢 GREEN</div>
+                    <div class="time-label">Time: 0s</div>
+                    <div class="count-label">Vehicles: 0 | Weight: 0.0</div>
+                    <div class="efficiency-label">Efficiency: 0.0%</div>
+                </div>
+            </div>
+            <div class="signal-card">
+                <div class="signal-title">Signal B</div>
+                <div class="video-feed" id="videoB">Video Feed</div>
+                <div class="signal-info">
+                    <div class="status-label green">🟢 GREEN</div>
+                    <div class="time-label">Time: 0s</div>
+                    <div class="count-label">Vehicles: 0 | Weight: 0.0</div>
+                    <div class="efficiency-label">Efficiency: 0.0%</div>
+                </div>
+            </div>
+            <div class="signal-card">
+                <div class="signal-title">Signal C</div>
+                <div class="video-feed" id="videoC">Video Feed</div>
+                <div class="signal-info">
+                    <div class="status-label green">🟢 GREEN</div>
+                    <div class="time-label">Time: 0s</div>
+                    <div class="count-label">Vehicles: 0 | Weight: 0.0</div>
+                    <div class="efficiency-label">Efficiency: 0.0%</div>
+                </div>
+            </div>
+            <div class="signal-card">
+                <div class="signal-title">Signal D</div>
+                <div class="video-feed" id="videoD">Video Feed</div>
+                <div class="signal-info">
+                    <div class="status-label green">🟢 GREEN</div>
+                    <div class="time-label">Time: 0s</div>
+                    <div class="count-label">Vehicles: 0 | Weight: 0.0</div>
+                    <div class="efficiency-label">Efficiency: 0.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-side">
+            <div class="system-status">
+                <div>Total Vehicles: <span id="totalVehicles">0</span></div>
+                <div>System Efficiency: <span id="systemEfficiency">0.0%</span></div>
+                <div>Cycle Time: <span id="cycleTime">0s</span></div>
+                <div>Active Signal: <span id="activeSignal">A</span></div>
+            </div>
+
+            <div class="system-log">
+                <div class="log-title">System Log</div>
+                <textarea id="logText" readonly></textarea>
+            </div>
+
+            <div class="dashboard-controls vertical-controls">
+                <button class="blue">🎯 New Areas</button>
+                <button class="green">📁 Load Areas</button>
+                <button class="dark-green">▶️ Start System</button>
+                <button class="red">⏹️ Stop System</button>
+                <button class="orange">🚨 Emergency Mode</button>
+                <button class="purple">📊 Analytics</button>
+                <button class="gray">⚙️ Settings</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Update junction title based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const junction = urlParams.get('junction');
+        if (junction) {
+            document.getElementById('junctionTitle').textContent = `${junction.charAt(0).toUpperCase() + junction.slice(1)} - Traffic Management Dashboard`;
+        }
+
+        // Simulate system log updates
+        const logText = document.getElementById('logText');
+        const logMessages = [
+            '[INFO] System initialized successfully',
+            '[INFO] Camera feeds connected',
+            '[INFO] YOLOv8 model loaded successfully',
+            '[INFO] Detection areas loaded',
+            '[INFO] Traffic analysis started',
+            '[WARNING] Signal 2 requires maintenance',
+            '[ERROR] Signal 4 critical error detected',
+            '[INFO] Traffic flow analysis complete'
+        ];
+
+        function addLogMessage() {
+            const message = logMessages[Math.floor(Math.random() * logMessages.length)];
+            const timestamp = new Date().toLocaleTimeString();
+            logText.value = `[${timestamp}] ${message}\n` + logText.value;
+        }
+
+        // Add initial log messages
+        for (let i = 0; i < 3; i++) {
+            addLogMessage();
+        }
+
+        // Add new log message every 5 seconds
+        setInterval(addLogMessage, 5000);
+
+        // Simulate system status updates
+        function updateSystemStatus() {
+            document.getElementById('totalVehicles').textContent = Math.floor(Math.random() * 50);
+            document.getElementById('systemEfficiency').textContent = (Math.random() * 100).toFixed(1) + '%';
+            document.getElementById('cycleTime').textContent = Math.floor(Math.random() * 60) + 's';
+            document.getElementById('activeSignal').textContent = String.fromCharCode(65 + Math.floor(Math.random() * 4));
+        }
+
+        // Update system status every 2 seconds
+        setInterval(updateSystemStatus, 2000);
+    </script>
+</body>
+</html>

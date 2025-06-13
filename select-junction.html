@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Management System - Select Junction</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="org-name">Society For Cyberabad Security Council</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card junction-select-card">
+            <h1>Select Junction</h1>
+            <p class="subtitle">Choose a junction to monitor and manage traffic</p>
+            
+            <form id="junctionForm" class="junction-form">
+                <div class="form-group">
+                    <label for="junction">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Junction Location
+                    </label>
+                    <select id="junction" name="junction" required>
+                        <option value="">Select a junction...</option>
+                        <option value="junction1">Junction 1 - Main Street</option>
+                        <option value="junction2">Junction 2 - Downtown</option>
+                        <option value="junction3">Junction 3 - Industrial Area</option>
+                        <option value="junction4">Junction 4 - Residential Zone</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="main-btn">
+                    <i class="fas fa-arrow-right"></i>
+                    Proceed to Dashboard
+                </button>
+            </form>
+
+            <div class="back-link">
+                <a href="login.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Login
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('junctionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const junction = document.getElementById('junction').value;
+            if (junction) {
+                window.location.href = `dashboard.html?junction=${junction}`;
+            }
+        });
+    </script>
+</body>
+</html> 
